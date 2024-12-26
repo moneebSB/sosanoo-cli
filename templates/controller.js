@@ -12,6 +12,10 @@ class ${name[0].toUpperCase() + name.slice(1)}Controller extends BaseController 
     router.delete('/${name}s', this.handlerRunner(handlers.Delete${name[0].toUpperCase() + name.slice(1)}Handler))
     return router
   }
+
+  async init() {
+    this.logger.debug('${entity} ${this.constructor.name} initialized...')
+  }
 }
 
 module.exports = { ${name[0].toUpperCase() + name.slice(1)}Controller }
