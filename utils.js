@@ -105,7 +105,22 @@ exports.generateController = async (name, version, entity) => {
   await generateFile(controllerPath, templates.ControllerTemplate(name, entity, `${version}/${entity}/${name}`))
 }
 
+
+function generateMigrationFilename(description) {
+  const now = new Date();
+  
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0'); // Get month in 2 digits
+  const day = String(now.getDate()).padStart(2, '0'); // Get day in 2 digits
+  const hours = String(now.getHours()).padStart(2, '0'); // Get hours in 2 digits
+  const minutes = String(now.getMinutes()).padStart(2, '0'); // Get minutes in 2 digits
+  const seconds = String(now.getSeconds()).padStart(2, '0'); // Get seconds in 2 digits
+  
+  const timestamp = `${year}${month}${day}${hours}${minutes}${seconds}`;
+  
+  return `${timestamp}_${description}.js`;
+}
 exports.generateMigration = async (name) => {
-  const migrationPath = `database/migrations/${new Date().toISOString().replace(/[-:.]/g, '').slice(0, 14)}_create_${name.toLowerCase()}_table.js`
+  const migrationPath = `database/migrations/${generateMigrationFilename(`create_${name.toLowerCase()}_table`)}`
   await generateFile(migrationPath, templates.MigrationTemplate(name), false)
 }
