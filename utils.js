@@ -106,6 +106,6 @@ exports.generateController = async (name, version, entity) => {
 }
 
 exports.generateMigration = async (name) => {
-  const migrationPath = `database/migrations/create_${name.toLowerCase()}_table.js`
+  const migrationPath = `database/migrations/${new Date().toISOString().replace(/[-:.]/g, '').slice(0, 14)}_create_${name.toLowerCase()}_table.js`
   await generateFile(migrationPath, templates.MigrationTemplate(name), false)
 }
