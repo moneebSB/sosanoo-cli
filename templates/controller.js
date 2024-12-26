@@ -14,7 +14,7 @@ class ${name[0].toUpperCase() + name.slice(1)}Controller extends BaseController 
   }
 
   async init() {
-    this.logger.debug('${entity} ${this.constructor.name} initialized...')
+    this.logger.debug('${entity.toUpperCase()} ${name[0].toUpperCase() + name.slice(1)}Controller initialized...')
   }
 }
 
