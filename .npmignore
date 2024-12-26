@@ -1,0 +1,39 @@
+# Node.js specific
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+
+# Test and build files
+test/
+tests/
+*.test.js
+*.spec.js
+coverage/
+
+# Documentation
+*.md
+
+# Configuration and IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Optional files
+*.tgz
+dist/
+build/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Other files not to include
+*.log
+*.bak

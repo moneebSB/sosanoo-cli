@@ -3,12 +3,25 @@
 const { Command } = require('commander')
 const program = new Command()
 const utils = require('./utils')
+const logger = require('./logger')
 
 
 program
-  .name('scaffold-cli')
+  .name('Ignite-cli')
   .description('CLI to generate models, DAOs, handlers, controllers, and migrations')
   .version('1.0.0')
+  .showHelpAfterError('Use --help for usage instructions!')
+  .option('-t, --trace', 'display trace statements for commands')
+  .hook('preAction', (thisCommand, actionCommand) => {
+    if (thisCommand.opts().trace) {
+      logger.info(`About to call action handler for subcommand: ${actionCommand.name()}`)
+      logger.info('arguments: %O', actionCommand.args)
+      logger.info('options: %o', actionCommand.opts())
+    }
+  }).configureOutput({
+    writeOut: (str) => logger.info(str),
+    writeErr: (str) => logger.error(str),
+  })
 
 
 program
@@ -20,8 +33,6 @@ program
   .option('-e, --entity <entity>', 'Entity folder (default: app)', 'app')
   .action(async (type, options) => {
     const { name, version, entity } = options
-    const chalk = (await import('chalk')).default
-    // Define what to generate based on the type
     const generators = {
       model: () => utils.generateModel(name),
       dao: () => utils.generateDAO(name),
@@ -31,16 +42,18 @@ program
     }
 
     if (!type || type === 'all') {
-      Object.values(generators).forEach((gen) => gen())
-      console.log('All scaffolding completed.')
+      for (const value of Object.values(generators)) {
+        await value()
+      }
+
+      logger.success('All scaffolding completed.')
     } else if (generators[type]) {
-      generators[type]()
-      console.log(chalk.green(`[√] ${type} scaffolding completed.`))
+      await generators[type]()
+      logger.success(`[√] ${type} scaffolding completed.`)
 
     } else {
-      console.error(chalk.red(`Unknown scaffold type: ${type}`))
-      process.exit(1)
+      logger.fatal(`Unknown scaffold type: ${type}`)
     }
-  }).showHelpAfterError('Use --help for usage instructions!')
+  })
 
 program.parse(process.argv)

@@ -1,16 +1,25 @@
 {
-  "name": "wizard",
+  "name": "Ignite",
   "version": "1.0.0",
-  "description": "",
+  "description": "A funky CLI tool for creating folder structures with ease.",
   "main": "cli.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "cli",
+    "folders",
+    "scaffolding",
+    "structure",
+    "wizard",
+    "automation"
+  ],
+  "author": "Moneeb Shammout",
   "license": "ISC",
+  "bin": {
+    "ignite": "./index.js"
+  },
   "dependencies": {
-    "chalk": "^5.4.1",
     "commander": "^12.1.0",
     "fs-extra": "^11.2.0"
   }
