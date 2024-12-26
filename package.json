@@ -1,5 +1,5 @@
 {
-  "name": "Ignite",
+  "name": "Susanoo/Ignite",
   "version": "1.0.0",
   "description": "A funky CLI tool for creating folder structures with ease.",
   "main": "cli.js",
