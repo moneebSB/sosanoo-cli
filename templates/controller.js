@@ -18,5 +18,5 @@ class ${name[0].toUpperCase() + name.slice(1)}Controller extends BaseController 
   }
 }
 
-module.exports = { ${name[0].toUpperCase() + name.slice(1)}Controller }
+module.exports = ${name[0].toUpperCase() + name.slice(1)}Controller
 `

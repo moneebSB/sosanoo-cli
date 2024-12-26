@@ -42,17 +42,22 @@ program
     }
 
     if (!type || type === 'all') {
-      for (const value of Object.values(generators)) {
+      for (const [key , value] of Object.entries(generators)) {
         await value()
+        logger.success(`[√] ${key.toUpperCase()} scaffolding completed.`)
       }
 
       logger.success('All scaffolding completed.')
-    } else if (generators[type]) {
-      await generators[type]()
-      logger.success(`[√] ${type} scaffolding completed.`)
-
     } else {
-      logger.fatal(`Unknown scaffold type: ${type}`)
+      for (const t of type.split(',')) {
+        const scaffold = generators[t.toLowerCase()]
+        if (scaffold) {
+          await scaffold()
+          logger.success(`[√] ${t.toUpperCase()} scaffolding completed.`)
+        } else {
+          logger.fatal(`Unknown scaffold type: ${type}`)
+        }
+      }
     }
   })
 
