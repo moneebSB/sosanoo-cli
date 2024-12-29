@@ -14,7 +14,7 @@ Ignite CLI is a powerful tool designed to bootstrap entities for projects built 
 ## Installation  
 
 ```bash  
-npm install ignite-cli --save-dev  
+npm install susanoo-ignite --save-dev  && npm link susanoo-ignite
 ```  
 
 ---
