@@ -15,4 +15,8 @@ module.exports = class Logger {
   static success(message) {
     console.log(`\x1b[32m[SUCCESS] ${message}\x1b[0m`) // Green
   }
+
+  static warn (message) {
+    console.log(`\x1b[33m[WARNING] ${message}\x1b[0m`) // Yellow
+  }
 }

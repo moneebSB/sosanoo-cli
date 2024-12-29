@@ -4,15 +4,36 @@ const { Command } = require('commander')
 const program = new Command()
 const utils = require('./utils')
 const logger = require('./logger')
+const semver = require('semver')
+const pkg = require('./package.json')
 
+async function checkForUpdates() {
+  const npmRegistryUrl = `https://registry.npmjs.org/${pkg.name}`
+  try {
+    const response = await fetch(npmRegistryUrl)
+    if (response.ok) {
+      const data = await response.json()
+      const latestVersion = data['dist-tags'].latest
+
+      if (semver.lt(pkg.version, latestVersion)) {
+        logger.warn(`Update available: ${latestVersion}`)
+        logger.warn(`Current version: ${pkg.version}`)
+        logger.warn(`Run \`npm update ${pkg.name}\` to update.\n`)
+      }
+    }
+  } catch (error) {
+    logger.error('Failed to check for updates:', error.message)
+  }
+}
 
 program
   .name('Ignite-cli')
   .description('CLI to generate models, DAOs, handlers, controllers, and migrations')
-  .version('1.0.0')
+  .version(pkg.version)
   .showHelpAfterError('Use --help for usage instructions!')
   .option('-t, --trace', 'display trace statements for commands')
-  .hook('preAction', (thisCommand, actionCommand) => {
+  .hook('preAction', async (thisCommand, actionCommand) => {
+    await checkForUpdates()
     if (thisCommand.opts().trace) {
       logger.info(`About to call action handler for subcommand: ${actionCommand.name()}`)
       logger.info('arguments: %O', actionCommand.args)
