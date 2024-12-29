@@ -122,7 +122,7 @@ Ignite CLI creates a `templates` folder inside an `ignite` directory in your pro
 
 ## Contributing  
 
-Feel free to contribute to the project by submitting issues or pull requests to the [GitHub repository](https://github.com/moayyadfaris/susanoo).  
+Feel free to contribute to the project by submitting issues or pull requests to the [GitHub repository](https://github.com/moneebSB/sosanoo-cli).  
 
 ---
 
