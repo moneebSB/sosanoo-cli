@@ -51,7 +51,8 @@ ignite g [type] -n <name> [options]
   - `type`: The type of scaffold to generate. Possible values:  
     - `model`: Generate a model scaffold.  
     - `dao`: Generate a DAO scaffold.  
-    - `handler`: Generate a handler scaffold.  
+    - `handler`: Generate a handler scaffold.
+       - `handler:create|update|get|list|delete`: To generate one handler  
     - `controller`: Generate a controller scaffold.  
     - `migration`: Generate a migration scaffold.  
     - `all OR LEAVE IT EMPTY`: Generate all scaffolds.  
@@ -90,11 +91,11 @@ Ignite CLI creates a `templates` folder inside an `ignite` directory in your pro
    ```
    ignite/
      templates/
-       model/
-       dao/
-       handler/
-       controller/
-       migration/
+       model.js
+       dao.js
+       handler.js
+       controller.js
+       migration.js
    ```  
 
 2. **Edit Templates**:  
@@ -102,7 +103,7 @@ Ignite CLI creates a `templates` folder inside an `ignite` directory in your pro
    - Future scaffolds will use these customized templates.  
 
 3. **Restore Defaults**:  
-   - If you need to restore the default templates, simply delete the customized files. The CLI will regenerate them the next time you run a command.  
+   - If you need to restore the default templates, simply delete the customized files. The CLI will fallback to the default version of them.  
 
 ---
 

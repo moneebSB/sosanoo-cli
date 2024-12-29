@@ -36,13 +36,13 @@ program
     const generators = {
       model: () => utils.generateModel(name),
       dao: () => utils.generateDAO(name),
-      handler: () => utils.generateHandler(name, version, entity),
+      handler: (type = 'all') => utils.generateHandler(name, version, entity, type),
       controller: () => utils.generateController(name, version, entity),
       migration: () => utils.generateMigration(name),
     }
 
     if (!type || type === 'all') {
-      for (const [key , value] of Object.entries(generators)) {
+      for (const [key, value] of Object.entries(generators)) {
         await value()
         logger.success(`[√] ${key.toUpperCase()} scaffolding completed.`)
       }
@@ -50,9 +50,9 @@ program
       logger.success('All scaffolding completed.')
     } else {
       for (const t of type.split(',')) {
-        const scaffold = generators[t.toLowerCase()]
+        const [scaffold, type] = t.includes(':') ? [generators[t.split(':')[0]], t.split(':')[1]] : [generators[t.toLowerCase()], undefined]
         if (scaffold) {
-          await scaffold()
+          await scaffold(type)
           logger.success(`[√] ${t.toUpperCase()} scaffolding completed.`)
         } else {
           logger.fatal(`Unknown scaffold type: ${type}`)

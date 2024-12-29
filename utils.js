@@ -19,7 +19,7 @@ const findRootProjectPath = async (startDir) => {
       await fsAsync.access(packageJsonPath)
       return currentDir
     } catch (err) {
-     
+
       const parentDir = path.dirname(currentDir)
       if (parentDir === currentDir) break
       currentDir = parentDir
@@ -105,7 +105,8 @@ exports.generateDAO = async (name) => {
 exports.generateHandler = async (name, version, entity, type = 'all') => {
   const versionPath = `handlers/${version}/${entity}/${name}`
   for (const handler of Object.keys(await getTemplate('HandlerTemplate'))) {
-    await generateFile(path.join(versionPath, `${handler[0].toUpperCase() + handler.slice(1)}${name[0].toUpperCase() + name.slice(1)}Handler.js`), (await getTemplate('HandlerTemplate'))[handler](name))
+    if (type === 'all' || type === handler)
+      await generateFile(path.join(versionPath, `${handler[0].toUpperCase() + handler.slice(1)}${name[0].toUpperCase() + name.slice(1)}Handler.js`), (await getTemplate('HandlerTemplate'))[handler](name))
   }
 }
 
