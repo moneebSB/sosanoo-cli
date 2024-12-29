@@ -31,7 +31,6 @@ const findRootProjectPath = async (startDir) => {
 
 const getTemplate = async (templateName) => {
   try {
-    console.log("from custom", require(`${await findRootProjectPath(process.cwd())}/ignite/templates`)[templateName])
     return require(`${await findRootProjectPath(process.cwd())}/ignite/templates`)[templateName] || templates[templateName]
   } catch (err) {
     return templates[templateName]
@@ -39,8 +38,6 @@ const getTemplate = async (templateName) => {
 }
 
 const generateFile = async (filePath, template, upsertIndex = true, isList = false) => {
-
-
   const basePath = await findRootProjectPath(process.cwd())
   if (!basePath) {
     logger.fatal('Could not find a package.json in any parent directory.')
