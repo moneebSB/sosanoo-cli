@@ -25,5 +25,13 @@
     "fs-extra": "^11.2.0",
     "node-fetch": "^3.3.2",
     "semver": "^7.6.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moneebSB/sosanoo-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/moneebSB/sosanoo-cli/issues"
+  },
+  "homepage": "https://github.com/moneebSB/sosanoo-cli#readme"
 }
