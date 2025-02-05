@@ -21,8 +21,10 @@
     "ignite": "./index.js"
   },
   "dependencies": {
+    "chalk": "^4.1.2",
     "commander": "^12.1.0",
     "fs-extra": "^11.2.0",
+    "gradient-string": "^2.0.1",
     "node-fetch": "^3.3.2",
     "semver": "^7.6.3"
   },
