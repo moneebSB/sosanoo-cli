@@ -1,6 +1,6 @@
 {
   "name": "susanoo-ignite",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "A funky CLI tool for creating folder structures with ease.",
   "main": "index.js",
   "scripts": {
