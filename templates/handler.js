@@ -38,6 +38,9 @@ class Update${name[0].toUpperCase() + name.slice(1)}Handler extends BaseHandler 
 
   static get validationRules() {
     return {
+      params: {
+          id: new RequestRule(${name[0].toUpperCase() + name.slice(1)}Model.schema.id, { required: true }),
+        },
       body: {
         example: new RequestRule(${name[0].toUpperCase() + name.slice(1)}Model.schema.example),
       },
@@ -45,7 +48,7 @@ class Update${name[0].toUpperCase() + name.slice(1)}Handler extends BaseHandler 
   }
 
   static async run(ctx) {
-    return this.result({ data: await ${name[0].toUpperCase() + name.slice(1)}DAO.baseUpdate(ctx.body) })
+    return this.result({ data: await ${name[0].toUpperCase() + name.slice(1)}DAO.baseUpdate(ctx.params.id,ctx.body) })
   }
 }
 

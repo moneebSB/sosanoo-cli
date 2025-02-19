@@ -20,6 +20,8 @@ class ${name[0].toUpperCase() + name.slice(1)}DAO extends BaseDAO {
     json = super.$formatJson(json)
     delete json.createdAt
     delete json.updatedAt
+    delete json.isDeleted
+    delete json.deletedAt
 
     return json
   }
