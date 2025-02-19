@@ -179,13 +179,13 @@ program
   .showHelpAfterError('Use --help for usage instructions!')
   .option('-t, --trace', 'display trace statements for commands')
   .hook('preAction', async (thisCommand, actionCommand) => {
-    await checkForUpdates()
+    showWelcomeScreen()
     if (thisCommand.opts().trace) {
       logger.info(`About to call action handler for subcommand: ${actionCommand.name()}`)
       logger.info('arguments: %O', actionCommand.args)
       logger.info('options: %o', actionCommand.opts())
     }
-    showWelcomeScreen()
+    await checkForUpdates()
   }).configureOutput({
     writeOut: (str) => logger.info(str),
     writeErr: (str) => logger.error(str),
